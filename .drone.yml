@@ -1,9 +1,9 @@
 ---
 kind: pipeline
-name: deploy
+name: Github Test
 
 steps:
-  - name: pre-check
+  - name: pre-check-DroneTest1
     image: docker
     environment:
       DOCKER_PASSWORD:
@@ -20,7 +20,7 @@ steps:
       - echo $${MY_TELEGRAM_ID}
       - echo $${GITHUB_TOKEN}
 
-  - name: unit-test
+  - name: unit-test-Drone-test1
     image: node:10
     commands:
       - node test/index.js
@@ -35,7 +35,7 @@ steps:
           - push
           - pull_request
 
-  - name: build-branch-image
+  - name: build-branch-image-Drone-test1
     image: plugins/docker
     settings:
       repo: allovince/drone-ci-demo
@@ -48,7 +48,7 @@ steps:
       branch: feature/*
       event: push
 
-  - name: build-test-image
+  - name: build-test-image-Drone-test1
     image: plugins/docker
     settings:
       repo: allovince/drone-ci-demo
@@ -61,7 +61,7 @@ steps:
       branch: dev
       event: push
 
-  - name: build-staging-image
+  - name: build-staging-image-Drone-test1
     image: plugins/docker
     settings:
       repo: allovince/drone-ci-demo
@@ -74,7 +74,7 @@ steps:
       branch: master
       event: pull_request
 
-  - name: semantic-release
+  - name: semantic-release-drone-test1
     image: gtramontina/semantic-release:15.13.3
     environment:
       GITHUB_TOKEN:
@@ -85,7 +85,7 @@ steps:
       branch: master
       event: push
 
-  - name: build-production-image
+  - name: build-production-image-drone-test1
     image: plugins/docker
     settings:
       repo: allovince/drone-ci-demo
